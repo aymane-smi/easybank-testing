@@ -61,9 +61,14 @@ class AgencyServiceTest {
         }
     }
 
-//    @Test
-//    @DisplayName("simulation of creating empty agency")
-//    public
+    @Test
+    @DisplayName("simulation of creating empty agency")
+    public void createException(){
+        Exception e = assertThrows(Exception.class, ()->{
+            agencyService.create(null);
+        });
+        assertEquals(e.getMessage(), "*****   L'AGENCE NE PAS ETRE NULL   *****");
+    }
 
     @Test
     @DisplayName("simulate the delete of an agency")
@@ -80,6 +85,16 @@ class AgencyServiceTest {
     }
 
     @Test
+    @DisplayName("simulation of updating empty agency")
+    void deleteNonValideCode(){
+        Exception e = assertThrows(Exception.class, ()->{
+            agencyService.delete("");
+        });
+        assertEquals(e.getMessage(), "*****   LE CODE D'AGENCE NE PAS ETRE VIDE   *****");
+    }
+
+
+    @Test
     @DisplayName("simulate the update of an agency")
     void update() {
         try{
@@ -92,6 +107,15 @@ class AgencyServiceTest {
             System.out.println(e.getMessage());
             fail("Unexcepted Excpetion");
         }
+    }
+
+    @Test
+    @DisplayName("simulate the update of an empty agency")
+    void updateEmpty(){
+        Exception e = assertThrows(Exception.class, ()->{
+            agencyService.update(null);
+        });
+        assertEquals(e.getMessage(), "*****   L'AGENCE NE PAS ETRE NULL   *****");
     }
 
     @Test

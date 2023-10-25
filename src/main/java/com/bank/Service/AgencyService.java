@@ -18,40 +18,26 @@ public class AgencyService {
         this.agencyDao = agencyDao;
     }
 
-    public Optional<Agency> create(Agency agency){
-        try{
+    public Optional<Agency> create(Agency agency) throws Exception{
             if(agency == null)
                 throw new Exception("*****   L'AGENCE NE PAS ETRE NULL   *****");
             Optional<Agency> optionalAgency = agencyDao.create(agency);
             return optionalAgency;
-        }catch(Exception e){
-            System.out.println(e.getClass()+"::"+e.getMessage());
-        }
-        return null;
     }
 
-    public boolean delete(String code){
-        try{
+    public boolean delete(String code) throws Exception{
             if(code == "")
                 throw new Exception("*****   LE CODE D'AGENCE NE PAS ETRE VIDE   *****");
             if(agencyDao.delete(code) == 1)
                 return  true;
-        }catch(Exception e){
-            System.out.println(e.getClass()+"::"+e.getMessage());
-        }
         return false;
     }
 
-    public Optional<Agency> update(Agency agency){
-        try{
+    public Optional<Agency> update(Agency agency) throws Exception{
             if(agency == null)
                 throw new Exception("*****   L'AGENCE NE PAS ETRE NULL   *****");
             Optional<Agency> optionalAgency = agencyDao.update(agency);
             return optionalAgency;
-        }catch(Exception e){
-            System.out.println(e.getClass()+"::"+e.getMessage());
-        }
-        return Optional.empty();
     }
 
     public List<Agency> find(){
