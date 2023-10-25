@@ -12,8 +12,13 @@ import java.util.Optional;
 
 @ApplicationScoped
 public class AgencyDAOImpl implements AgencyDAO {
-    private Connection c = Connection.getInstance();
-    private EntityManager entityManager = c.getManager();
+    private Connection c;
+    private EntityManager entityManager;
+
+    public AgencyDAOImpl(){
+        c = Connection.getInstance();
+        entityManager = c.getManager();
+    }
 
     @Override
     @Transactional
@@ -99,14 +104,14 @@ public class AgencyDAOImpl implements AgencyDAO {
     }
 
     @Override
-    public Optional<Agency> findByAddress(String address) {
+    public Optional<List<Agency>> findByAddress(String address) {
         try {
             if (address.equals(""))
                 throw new Exception("***** L'ADRESS DE L'AGENCE NE PEUT PAS ETRE VIDE *****");
             entityManager.getTransaction().begin();
-            Agency agency = entityManager.createQuery("SELECT a FROM Agency a WHERE a.address = :address", Agency.class)
+            List<Agency> agency = entityManager.createQuery("SELECT a FROM Agency a WHERE a.address = :address", Agency.class)
                     .setParameter("address", address)
-                    .getSingleResult();
+                    .getResultList();
             entityManager.getTransaction().commit();
             return Optional.ofNullable(agency);
         } catch (Exception e) {
