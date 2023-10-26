@@ -13,3 +13,6 @@ test double can be divided into 4 pieces:
 in this project i,m going to use both **STUB** and **DUMMY** test.
 the tested classes are: ***AgencyService***, ***CreditService***.
 you can check the folder ```/src/test/java/com.bank```
+
+## PROJECT COVERAGE
+![coverage.png](coverage.png)

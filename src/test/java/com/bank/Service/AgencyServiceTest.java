@@ -85,6 +85,20 @@ class AgencyServiceTest {
     }
 
     @Test
+    @DisplayName("simulate the delete of an agency that doesn't existe")
+    void deleteFlase() {
+        try{
+            int result = 0;
+            when(agencyDAO.delete("AGENCY2")).thenReturn(result);
+            boolean tmp = agencyService.delete("AGENCY2");
+            assertEquals(false, tmp);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            fail("Unexcepted Exception");
+        }
+    }
+
+    @Test
     @DisplayName("simulation of updating empty agency")
     void deleteNonValideCode(){
         Exception e = assertThrows(Exception.class, ()->{
