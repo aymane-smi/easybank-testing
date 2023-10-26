@@ -18,9 +18,6 @@ public class CreditService {
         this.creditDao = creditDao;
     }
 
-    //    public CreditService(CreditDAOImpl creditDao){
-//        this.creditDao = creditDao;
-//    }
     public double makeSimulation(int value, int n) throws Exception{
         if(value <= 1000)
             throw new Exception("*****   LE MONTANT DOIT ETRE SUPERIEUR DE 1000   *****");
@@ -54,10 +51,14 @@ public class CreditService {
         return creditDao.findById(id).get();
     }
     public List<Credit> findByDate(LocalDate date) throws Exception {
+        if (date == null)
+            throw new Exception("*****   DATE EST INVALIDE    *****");
         List<Credit> credits = creditDao.findByDate(date);
         return credits;
     }
     public List<Credit> findByStatus(String status) throws Exception {
+        if (status.isEmpty())
+            throw new Exception("*****   STATUS EST INVALIDE    *****");
         List<Credit> credits = creditDao.findByStatus(status);
         return credits;
     }
